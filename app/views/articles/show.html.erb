@@ -12,7 +12,7 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @article.status %>
+  <%= link_to @article.status, article_toggle_status_path(@article), method: :patch %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |

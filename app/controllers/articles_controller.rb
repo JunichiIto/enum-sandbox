@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_status]
 
   # GET /articles
   # GET /articles.json
@@ -61,10 +61,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def toggle_status
+    @article.toggle_status!
+    redirect_to @article, notice: 'Article was successfully updated.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.find(params[:id] || params[:article_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
